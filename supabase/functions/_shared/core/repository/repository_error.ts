@@ -1,0 +1,1 @@
+export type RepositoryError = "unknown" | "conflict" | "not_found";

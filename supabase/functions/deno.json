@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "@supabase/server": "npm:@supabase/server@^1",
+    "@supabase/postgrest-js": "npm:@supabase/postgrest-js",
+    "@supabase/functions-js": "jsr:@supabase/functions-js@^2"
+  }
+}

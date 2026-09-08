@@ -1,0 +1,8 @@
+# Supabase local
+.env
+.temp/
+.branches/
+
+# IDE
+.idea/
+.vscode/
