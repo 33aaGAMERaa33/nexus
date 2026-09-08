@@ -18,6 +18,15 @@ class LoginViewModel with ChangeNotifier {
   AuthError? _loginError;
   AuthError? get loginError => _loginError;
 
+  bool _passwordVisible = false;
+  bool get passwordVisible => _passwordVisible;
+
+  set passwordVisible(bool value) {
+    if(_passwordVisible == value) return;
+    _passwordVisible = value;
+    notifyListeners();
+  }
+
   Future<void> login() async {
     if (_isLoading || !formKey.currentState!.validate()) return;
     _isLoading = true;

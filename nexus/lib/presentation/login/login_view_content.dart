@@ -12,18 +12,22 @@ class LoginViewContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Form(
-            key: _viewModel.formKey,
-            child: Column(
-              mainAxisSize: .min,
-              children: [
-                _loginField(),
-                _passwordField(),
-                _loginButton(context),
-                _errorMessage(),
-              ],
+      body: Padding(
+        padding: const EdgeInsetsGeometry.symmetric(horizontal: 12),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Form(
+              key: _viewModel.formKey,
+              child: Column(
+                spacing: 12,
+                mainAxisSize: .min,
+                children: [
+                  _loginField(),
+                  _passwordField(),
+                  _loginButton(context),
+                  _errorMessage(),
+                ],
+              ),
             ),
           ),
         ),
@@ -33,8 +37,9 @@ class LoginViewContent extends StatelessWidget {
 
   Widget _loginField() {
     return TextFormField(
-      enabled: !_viewModel.isLoading,
       validator: basicValidator,
+      keyboardType: .emailAddress,
+      enabled: !_viewModel.isLoading,
       controller: _viewModel.loginFieldController,
       decoration: InputDecoration(labelText: "Login"),
     );
@@ -42,24 +47,35 @@ class LoginViewContent extends StatelessWidget {
 
   Widget _passwordField() {
     return TextFormField(
-      enabled: !_viewModel.isLoading,
       validator: basicValidator,
+      enabled: !_viewModel.isLoading,
+      obscureText: !_viewModel.passwordVisible,
       controller: _viewModel.passwordFieldController,
-      decoration: InputDecoration(labelText: "Senha"),
+      keyboardType: _viewModel.passwordVisible ? .visiblePassword : null,
+      decoration: InputDecoration(
+        labelText: "Senha",
+        suffixIcon: IconButton(
+          onPressed: () => _viewModel.passwordVisible = !_viewModel.passwordVisible, 
+          icon: Icon(_viewModel.passwordVisible ? Icons.remove_red_eye : Icons.password),
+        )
+      ),
     );
   }
 
   Widget _loginButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: _viewModel.isLoading ? null : () async {
-        await _viewModel.login();
-        if(!context.mounted) return;
-
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-          return SessionPage(SupabaseSessionRepository());
-        }));
-      },
-      child: Text("Entrar"),
+    return SizedBox(
+      width: double.infinity,
+      child: FilledButton(
+        onPressed: _viewModel.isLoading ? null : () async {
+          await _viewModel.login();
+          if(!context.mounted) return;
+      
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            return SessionPage(SupabaseSessionRepository());
+          }));
+        },
+        child: Text("Entrar"),
+      ),
     );
   }
 

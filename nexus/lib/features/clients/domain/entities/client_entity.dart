@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 
-enum PurchaseStatus { 
+enum PurchaseStatus {
+  pending(
+    value: "pending",
+    translate: "Pendente",
+    textColor: Color(0xFF60A5FA),
+    containerColor: Color(0xFF172554),
+  ),
+  
   purchased(
-    value: "purchased", 
+    value: "purchased",
     translate: "Comprou",
     textColor: Color(0xFF60EA93),
     containerColor: Color(0xFF064425),
-  ), 
+  ),
 
   noResponse(
-    value: "no_response", 
+    value: "no_response",
     translate: "Sem resposta",
     textColor: Color(0xFFF99E2B),
     containerColor: Color(0xFF3F3201),
-  ), 
+  ),
 
   notPurchased(
-    value: "not_purchased", 
+    value: "not_purchased",
     translate: "Não comprou",
     textColor: Color(0xFFC11302),
     containerColor: Color(0xFF430202),
@@ -27,38 +34,34 @@ enum PurchaseStatus {
   final String translate;
   final Color containerColor;
 
-  const new({
-    required this.value, 
+  const PurchaseStatus({
+    required this.value,
     required this.translate,
     required this.textColor,
-    required this.containerColor
+    required this.containerColor,
   });
 }
 
 class ClientEntity {
   final String uuid;
-
   final String name;
   final String phone;
-
   final PurchaseStatus purchaseStatus;
-  
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  const new({
-    required this.uuid, 
-    required this.name, 
-    required this.phone, 
-    required this.createdAt, 
+  const ClientEntity({
+    required this.uuid,
+    required this.name,
+    required this.phone,
+    required this.createdAt,
     required this.updatedAt,
-    required this.purchaseStatus, 
+    required this.purchaseStatus,
   });
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        other is ClientEntity && uuid == other.uuid;
+    return identical(this, other) || other is ClientEntity && uuid == other.uuid;
   }
 
   @override

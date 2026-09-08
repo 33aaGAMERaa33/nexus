@@ -1,6 +1,5 @@
-import { PurchaseStatus } from "../features/clients/entities/client_entity.ts";
-import { Constants } from "./types.ts";
+import { PURCHASE_STATUS_VALUES, PurchaseStatus } from "../features/clients/entities/client_entity.ts";
 
 export function isPurchaseStatus(value: string): value is PurchaseStatus {
-  return Constants.public.Enums.purchase_status.includes(value as PurchaseStatus);
+  return PURCHASE_STATUS_VALUES.includes(value);
 }

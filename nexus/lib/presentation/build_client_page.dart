@@ -89,22 +89,22 @@ class BuildClientPageState extends State<BuildClientPage> {
   Widget _purchaseStatusField() {
     return Column(
       crossAxisAlignment: .start,
-      children: [
-        Wrap(
-          spacing: 12,
-          children: PurchaseStatus.values.map((e) {
-            return ChoiceChip(
-              checkmarkColor: e.textColor,
-              selected: _purchaseStatus == e,
-              backgroundColor: e.containerColor,
-              label: Text(e.translate, style: TextStyle(color: e.textColor)), 
-              onSelected: (_) => setState(() {
-                _purchaseStatus = e;
-              }),
-            ); 
-          }).toList(),
-        )
-      ],
+      children: PurchaseStatus.values.map((e) {
+        return Card(
+          color: e != _purchaseStatus ? null : e.containerColor,
+          clipBehavior: .hardEdge,
+          child: RadioListTile(
+            value: e,
+            enabled: !_isLoading,
+            title: Text(e.translate),
+            activeColor: e.textColor,
+            groupValue: _purchaseStatus,
+            onChanged: _isLoading ? null : (value) => setState(() {
+              _purchaseStatus = e;  
+            }),
+          ),
+        ); 
+      }).toList(),
     );
   }
 

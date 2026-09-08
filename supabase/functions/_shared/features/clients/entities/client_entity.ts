@@ -1,4 +1,8 @@
-export type PurchaseStatus = "purchased" | "no_response" | "not_purchased";
+export type PurchaseStatus = "pending" | "purchased" | "no_response" | "not_purchased";
+
+export const PURCHASE_STATUS_VALUES = [
+    "pending", "purchased", "no_response", "not_purchased"
+];
 
 export interface ClientEntity {
     id: number;

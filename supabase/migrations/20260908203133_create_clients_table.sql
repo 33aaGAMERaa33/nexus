@@ -1,3 +1,10 @@
+create type public.purchase_status as enum(
+    'pending',
+    'purchased',
+    'no_response',
+    'not_purchased'
+);
+
 create table public.clients(
     id int generated always as identity primary key,
     uuid uuid unique not null default gen_random_uuid(),
@@ -10,11 +17,7 @@ create table public.clients(
     updated_at timestamptz not null default now()
 );
 
-create table public.reported_errors(
-    id int generated always as identity primary key,
-
-    message text not null,
-    stack_trace text not null,
-
-    reported_at timestamptz not null default now()
-);
+create trigger clients_updated_at
+before update on public.clients
+for each row
+execute function update_updated_at_column();
