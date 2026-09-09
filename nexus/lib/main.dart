@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/presentation/initialization_page.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       themeMode: .dark,
       darkTheme: .dark(),
+      navigatorKey: navigatorKey,
       home: const InitializationPage(),
     );
   }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/features/session/domain/repositories/session_repository.dart';
 import 'package:nexus/features/session/domain/storage/session_storage.dart';
-import 'package:nexus/presentation/home/home_page.dart';
 import 'package:nexus/presentation/initialization_page.dart';
 import 'package:nexus/presentation/login/login_page.dart';
 import 'package:nexus/presentation/splash_page.dart';
+import 'package:nexus/presentation/update_page.dart';
 
 class SessionPage extends StatelessWidget {
   final SessionRepository _sessionRepository;
@@ -18,7 +18,7 @@ class SessionPage extends StatelessWidget {
 
       if(hasSession) {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-          return HomePage(getter()); 
+          return UpdatePage(getter());
         }));
       }else {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {

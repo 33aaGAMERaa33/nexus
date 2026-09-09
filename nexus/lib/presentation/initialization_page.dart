@@ -11,6 +11,11 @@ import 'package:nexus/features/clients/domain/repositories/clients_repository.da
 import 'package:nexus/features/session/data/repositories/supabase_session_repository.dart';
 import 'package:nexus/features/session/domain/repositories/session_repository.dart';
 import 'package:nexus/features/session/domain/storage/session_storage.dart';
+import 'package:nexus/features/update/data/repositories/supabase_update_repository.dart';
+import 'package:nexus/features/update/data/services/apk_update_service.dart';
+import 'package:nexus/features/update/domain/repositories/update_repository.dart';
+import 'package:nexus/features/update/domain/services/update_service.dart';
+import 'package:nexus/features/update/domain/usecases/update_usecase.dart';
 import 'package:nexus/presentation/session_page.dart';
 import 'package:nexus/presentation/splash_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -67,9 +72,15 @@ class InitializationPage extends StatelessWidget {
     getter.registerLazySingleton<ClientsRepository>(() => SupabaseClientsRepository());
     getter.registerLazySingleton<SessionRepository>(() => SupabaseSessionRepository());
 
+    getter.registerLazySingleton<UpdateService>(() => ApkUpdateService(getter()));
+    getter.registerLazySingleton<UpdateRepository>(() => SupabaseUpdateRepository(getter()));
+    
+    getter.registerLazySingleton<UpdateUsecase>(() => UpdateUsecase(
+      updateService: getter(), updateRepository: getter()
+    ));
+
     getter.registerSingleton(LogoutUsecase(
-      sessionStorage: getter(), 
-      authRepository: getter(),
+      sessionStorage: getter(), authRepository: getter(),
     ));
   }
 } 

@@ -445,3 +445,14 @@ entrypoint = "./functions/clients-change_purchase_status/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/clients-change_purchase_status/*.html" ]
+
+[functions.update-get_latest]
+enabled = true
+verify_jwt = false
+import_map = "./functions/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/update-get_latest/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/update-get_latest/*.html" ]

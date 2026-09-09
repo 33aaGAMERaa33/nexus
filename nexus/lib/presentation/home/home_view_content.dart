@@ -7,6 +7,7 @@ import 'package:nexus/presentation/clients/clients_page.dart';
 import 'package:nexus/presentation/home/home_view_model.dart';
 import 'package:nexus/presentation/initialization_page.dart';
 import 'package:nexus/presentation/login/login_page.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class HomeViewContent extends StatelessWidget {
   final HomeViewModel _viewModel;
